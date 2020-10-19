@@ -35,4 +35,4 @@ pushd "${SRCDIR}"
 git log --oneline -1 >.rteval_git_version
 popd
 
-sudo apt --purge remove -y git
+apt --purge remove -y git

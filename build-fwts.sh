@@ -26,4 +26,4 @@ make install
 popd
 rm -rf "${SRCDIR}"
 
-sudo apt --purge remove -y git wget build-essential
+apt --purge remove -y git wget build-essential
