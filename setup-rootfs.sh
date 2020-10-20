@@ -65,7 +65,7 @@ BUILDDIR=${RELEASE}/${ARCH}/${OUTPUT_DIRNAME}
 mkdir -p ${OUTPUTDIR}
 mkdir -p tmp/${BUILDDIR}
 sudo chown root:root tmp/${BUILDDIR}
-cd tmp
+pushd tmp
 
 # remove --no-merged-usr when LAVA is fixed and can handle symlinks
 sudo qemu-debootstrap --no-merged-usr --arch=${ARCH} ${RELEASE} ${BUILDDIR} ${EXTRA_DEBOOT_STUFF}
@@ -132,6 +132,10 @@ done
 # mount -t tmpfs tmp /tmp
 #echo "tmpfs   /tmp         tmpfs   rw,nodev,nosuid,size=1G          0  0" | sudo tee -a ${BUILDDIR}/etc/fstab
 
-cd ${BUILDDIR}
+pushd ${BUILDDIR}
 sudo tar -cJvf ${OUTPUTDIR}/debian-${RELEASE}-${ARCH}-rootfs.tar.xz .
+${ROOTPATH}/create-ext4.rootfs.py --rootfs ${OUTPUTDIR}/debian-${RELEASE}-${ARCH}-rootfs.tar.xz --output_file debian-${RELEASE}-${ARCH}-rootfs.ext4.xz
+mv debian-${RELEASE}-${ARCH}-rootfs.ext4.xz ${OUTPUTDIR}/
+popd
+popd
 ## vim: set sw=4 sts=4 et foldmethod=syntax : ##
