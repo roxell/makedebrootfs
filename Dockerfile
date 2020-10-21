@@ -17,5 +17,5 @@ RUN apt-get update \
       xz-utils \
       --no-install-recommends
 RUN pip3 install setuptools
-RUN pip3 install simplediskimage==0.4
+RUN pip3 install simplediskimage==0.4.2
 COPY . /makedebrootfs
