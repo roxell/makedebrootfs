@@ -7,7 +7,7 @@ SRCDIR="/opt/builddir/"
 # Pre-install packages needed
 apt install -y git wget
 #apt install -y autoconf automake libglib2.0-dev libtool libpcre3-dev flex bison dkms libfdt-dev libbsd-dev
-apt install -y build-essential libglib2.0-dev libtool libpcre3-dev flex bison dkms libfdt-dev libbsd-dev autoconf
+apt install -y build-essential libglib2.0-dev libtool libpcre3-dev flex bison dkms libfdt-dev libbsd-dev autoconf pkgconf
 
 #mkdir -p "${SRCDIR}"
 #pushd "${SRCDIR}"
