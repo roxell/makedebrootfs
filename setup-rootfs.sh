@@ -48,7 +48,7 @@ while getopts "a:hp:r:" arg; do
 done
 
 
-EXTRA_DEBOOT_STUFF="http://ftp.se.debian.org/debian/ --include=systemd-sysv"
+EXTRA_DEBOOT_STUFF="http://ftp.se.debian.org/debian/ "
 if [[ ${ARCH} == "riscv64" ]]; then
     EXTRA_DEBOOT_STUFF="--keyring /usr/share/keyrings/debian-ports-archive-keyring.gpg --include=debian-ports-archive-keyring http://deb.debian.org/debian-ports"
     RELEASE=unstable
@@ -68,7 +68,8 @@ sudo chown root:root tmp/${BUILDDIR}
 pushd tmp
 
 # remove --no-merged-usr when LAVA is fixed and can handle symlinks
-sudo qemu-debootstrap --no-merged-usr --arch=${ARCH} ${RELEASE} ${BUILDDIR} ${EXTRA_DEBOOT_STUFF}
+sudo debootstrap --no-merged-usr --arch=${ARCH} ${RELEASE} ${BUILDDIR} ${EXTRA_DEBOOT_STUFF}
+echo crap
 
 sudo chroot ${BUILDDIR} passwd --delete root
 
@@ -134,8 +135,9 @@ done
 
 pushd ${BUILDDIR}
 sudo tar -cJvf ${OUTPUTDIR}/debian-${RELEASE}-${ARCH}-rootfs.tar.xz .
-${ROOTPATH}/create-ext4.rootfs.py --rootfs ${OUTPUTDIR}/debian-${RELEASE}-${ARCH}-rootfs.tar.xz --output_file debian-${RELEASE}-${ARCH}-rootfs.ext4.xz
-mv debian-${RELEASE}-${ARCH}-rootfs.ext4.xz ${OUTPUTDIR}/
+sudo chown $USER:$USER ${OUTPUTDIR}/debian-${RELEASE}-${ARCH}-rootfs.tar.xz
+fakeroot ${ROOTPATH}/create-ext4.rootfs.py --rootfs ${OUTPUTDIR}/debian-${RELEASE}-${ARCH}-rootfs.tar.xz --output_file ${OUTPUTDIR}/debian-${RELEASE}-${ARCH}-rootfs.ext4.xz
+rm ${OUTPUTDIR}/debian-${RELEASE}-${ARCH}-rootfs.ext4.xz.tmp
 popd
 popd
 ## vim: set sw=4 sts=4 et foldmethod=syntax : ##
