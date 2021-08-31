@@ -138,6 +138,7 @@ sudo tar -cJvf ${OUTPUTDIR}/debian-${RELEASE}-${ARCH}-rootfs.tar.xz .
 sudo chown $USER:$USER ${OUTPUTDIR}/debian-${RELEASE}-${ARCH}-rootfs.tar.xz
 fakeroot ${ROOTPATH}/create-ext4.rootfs.py --rootfs ${OUTPUTDIR}/debian-${RELEASE}-${ARCH}-rootfs.tar.xz --output_file ${OUTPUTDIR}/debian-${RELEASE}-${ARCH}-rootfs.ext4.xz
 rm ${OUTPUTDIR}/debian-${RELEASE}-${ARCH}-rootfs.ext4.xz.tmp
+sudo rm -rf ${ROOTPATH}/tmp/${BUILDDIR}
 popd
 popd
 ## vim: set sw=4 sts=4 et foldmethod=syntax : ##
