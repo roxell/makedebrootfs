@@ -1,15 +1,15 @@
 #!/bin/bash
 
 # sha 5ea8d1ce4178 ("common: Wait for ext4 background startup")
-RELEASE_VERSION="5ea8d1ce41785527cc571aa6b783ad0257a97bfb"
+RELEASE_VERSION="be8aea4ba507e6350b61d3a9e0b4c708ca99c87b"
 REPO_URL="https://github.com/gormanm/mmtests"
 SRCDIR="/opt/builddir/"
 MMTESTS_MAX_RETRIES=10
-MMTESTS_CONFIG_FILE="configs/config-scheduler-sysbench-cpu"
+MMTESTS_CONFIG_FILE="configs/config-scheduler-sysbench-cpu configs/config-io-dbench4-async"
 
 # Pre-install packages needed
 apt install -y git wget
-apt install -y build-essential wget perl git autoconf automake bc binutils-dev btrfs-progs linux-cpupower expect gcc hdparm hwloc-nox libpath-tiny-perl libtool numactl tcl time xfsprogs xfslibs-dev libopenmpi-dev
+apt install -y build-essential wget perl git autoconf automake bc binutils-dev btrfs-progs linux-cpupower expect gcc hdparm hwloc-nox libpath-tiny-perl libtool numactl tcl time xfsprogs xfslibs-dev libopenmpi-dev libpopt-dev
 
 git clone "${REPO_URL}" "${SRCDIR}"
 pushd "${SRCDIR}"
