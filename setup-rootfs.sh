@@ -16,7 +16,7 @@ TOP=${TOP}/rootfs-artifacts
 mkdir -p ${TOP}
 
 ARCH="arm64"
-RELEASE="buster"
+RELEASE="bullseye"
 EXTRA_DEBOOT_STUFF=""
 EXTRA_PACKAGES=""
 OUTPUT_DIRNAME="base"
